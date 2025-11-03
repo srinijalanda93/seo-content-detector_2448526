@@ -1,0 +1,14 @@
+#install all libaries using pip install install -r requirements.txt
+numpy
+pandas
+beautifulsoup4
+lxml
+requests
+scikit-learn
+scipy
+nltk
+textstat
+sentence-transformers     
+tqdm
+joblib
+streamlit                 # time premits  using UI
