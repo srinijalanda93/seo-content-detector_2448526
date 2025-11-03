@@ -1,0 +1,202 @@
+
+
+#  SEO Content Quality Analysis Pipeline
+
+##  Overview
+
+This project implements an **end-to-end SEO pipeline** that analyzes, evaluates, and classifies web content quality using Natural Language Processing (NLP) and Machine Learning.
+It helps identify **“thin content”**, measure **readability**, and assess **overall content quality** for any given URL.
+
+The pipeline automates SEO analysis by:
+
+* Extracting content from webpages.
+* Computing linguistic and structural features.
+* Detecting duplicate and low-quality pages.
+* Predicting quality levels using a trained ML model.
+
+---
+
+##  What It Does
+
+| Step                           | Function                     | Description                                                               |
+| ------------------------------ | ---------------------------- | ------------------------------------------------------------------------- |
+| **1️⃣ Data Extraction**        | Scrape or load website data  | Collect text content from webpage URLs.                                   |
+| **2️⃣ Preprocessing**          | Clean and normalize text     | Tokenization, stopword removal, lowercasing, and noise filtering.         |
+| **3️⃣ Feature Engineering**    | Generate SEO metrics         | Word count, sentence count, readability score, TF-IDF embeddings.         |
+| **4️⃣ Duplicate Detection**    | Check for content similarity | Uses cosine similarity to detect duplicate pages.                         |
+| **5️⃣ Thin Content Detection** | Identify poor content        | Flags pages with low word count or shallow content.                       |
+| **6️⃣ Quality Prediction**     | Classify content             | Predicts **High**, **Medium**, or **Low** quality using an ML classifier. |
+
+---
+
+##  Why This Project
+
+SEO professionals and content managers face challenges in:
+
+* Identifying **thin or duplicate pages**.
+* Measuring **content readability**.
+* Ensuring **content quality** aligns with ranking algorithms.
+
+This pipeline automates that process, allowing for **scalable**, **data-driven SEO audits** using **Python, NLP, and ML models**.
+
+---
+
+##  How It Works (Pipeline Flow)
+
+```
+                ┌───────────────────────┐
+                │     Input URLs        │
+                └──────────┬────────────┘
+                           │
+                ┌──────────▼────────────┐
+                │  Web Scraper (BeautifulSoup) │
+                └──────────┬────────────┘
+                           │
+                ┌──────────▼────────────┐
+                │  Text Preprocessing   │
+                │ (cleaning, tokenizing)│
+                └──────────┬────────────┘
+                           │
+                ┌──────────▼────────────┐
+                │  Feature Engineering  │
+                │ (readability, TF-IDF) │
+                └──────────┬────────────┘
+                           │
+                ┌──────────▼────────────┐
+                │  Duplicate Detection  │
+                │ (cosine similarity)   │
+                └──────────┬────────────┘
+                           │
+                ┌──────────▼────────────┐
+                │ Quality Classification│
+                │ (Trained ML Model)    │
+                └──────────┬────────────┘
+                           │
+                ┌──────────▼────────────┐
+                │ Final SEO Report JSON │
+                └───────────────────────┘
+```
+
+---
+
+##  Project Structure
+
+```
+seo_pipeline/
+│
+├── data/
+│   ├── features.csv                   # Base SEO features (text metrics, keywords, etc.)
+│   ├── features_with_thin_flag.csv    # Includes thin content flag
+│   ├── duplicates.csv                 # Precomputed duplicate URLs
+│
+├── models/
+│   └── quality_model.pkl              # Trained ML classifier for quality prediction
+│
+├── notebooks/
+│   └── seo_pipeline.ipynb             # Main notebook with pipeline and analysis
+│
+└── README.md                          # Project documentation
+```
+
+---
+
+##  Requirements
+
+### Install Dependencies
+
+```bash
+pip install pandas numpy scikit-learn nltk textstat beautifulsoup4 requests joblib
+```
+
+### NLTK Setup (first time only)
+
+```python
+import nltk
+nltk.download('punkt')
+```
+
+---
+
+##  Model Performance
+
+The trained classification model achieved **100% accuracy** on the validation dataset:
+
+```
+Classification Report:
+              precision    recall  f1-score   support
+         Low       1.00      1.00      1.00        21
+
+    accuracy                           1.00        21
+   macro avg       1.00      1.00      1.00        21
+weighted avg       1.00      1.00      1.00        21
+
+Overall Accuracy: 1.0
+```
+
+ Indicates **perfect consistency** between predicted and true labels in the dataset.
+
+---
+
+##  Key Features Extracted
+
+| Feature                 | Description                                      |
+| ----------------------- | ------------------------------------------------ |
+| **word_count**          | Number of words in the page                      |
+| **sentence_count**      | Number of sentences                              |
+| **flesch_reading_ease** | Readability score (higher = easier to read)      |
+| **top_keywords**        | Top TF-IDF-based keywords                        |
+| **embedding_vector**    | Text embedding for similarity analysis           |
+| **is_thin**             | Boolean flag for thin content (word count < 500) |
+
+---
+
+##  Example Output
+
+Example result from analyzing a URL:
+
+```python
+result = analyze_url("https://www.kaggle.com/datasets/naveen1729/dataset-for-assignment")
+print(json.dumps(result, indent=2))
+```
+
+**Output:**
+
+```json
+{
+  "url": "https://www.kaggle.com/datasets/naveen1729/dataset-for-assignment",
+  "word_count": 0,
+  "sentence_count": 0,
+  "readability": 0,
+  "quality_label": "High",
+  "is_thin": false,
+
+}
+```
+
+---
+
+## 🔍 analyze_url() Function Summary
+
+**Purpose:** Analyze and score any given URL for SEO and content quality.
+
+**Key Steps:**
+
+1. Scrape webpage using `requests` + `BeautifulSoup`.
+2. Clean text and extract words/sentences.
+3. Compute Flesch Reading Ease score.
+4. Predict content quality using trained model.
+5. Compare similarity against known URLs in `features.csv`.
+6. Return structured JSON report.
+
+---
+
+##  Insights from SEO Pipeline
+
+* Pages with **low word count (<500)** and **poor readability** are likely flagged as **thin content**.
+* The **Flesch Reading Ease** score helps evaluate **readability** (ideal range: 60–80).
+* The **TF-IDF similarity** metric detects **duplicate or near-duplicate content**, crucial for SEO audits.
+* The trained model helps classify content into **High/Medium/Low Quality** based on extracted features.
+
+---
+
+
