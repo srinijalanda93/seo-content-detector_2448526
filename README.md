@@ -1,58 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEO Content Analysis Pipeline — README</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #0b1120;
-      color: #e5e7eb;
-      line-height: 1.6;
-      margin: 40px auto;
-      max-width: 900px;
-      padding: 20px;
-    }
-    h1, h2, h3 {
-      color: #5eead4;
-    }
-    pre, code {
-      background: #1e293b;
-      padding: 6px 10px;
-      border-radius: 6px;
-      color: #d1fae5;
-    }
-    pre {
-      overflow-x: auto;
-      padding: 12px;
-    }
-    ul { margin-left: 20px; }
-    a { color: #93c5fd; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .highlight {
-      background: #1e293b;
-      padding: 10px;
-      border-left: 4px solid #5eead4;
-      border-radius: 4px;
-    }
-    .metric-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    .metric-table th, .metric-table td {
-      border: 1px solid #334155;
-      padding: 8px 10px;
-      text-align: center;
-    }
-    .metric-table th {
-      background-color: #1e293b;
-      color: #5eead4;
-    }
-  </style>
-</head>
-<body>
+
 
 <h1> SEO Content Analysis Pipeline</h1>
 
@@ -209,5 +155,4 @@ project_root/
 Core Committee – Xebit 2025<br>
 Project: <em>SEO Content Detection and Quality Scoring Pipeline</em></p>
 
-</body>
-</html>
+
